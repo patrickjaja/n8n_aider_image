@@ -1,0 +1,12 @@
+.aider/
+.aider.chat.history.md
+.aider.input.history
+.aider.tags.cache.v3
+vendor
+.idea
+README.md
+.n8n_data
+.mysql_data
+.mysql_dump
+Dockerfile
+docker-compose.yaml

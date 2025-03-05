@@ -1,0 +1,27 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: my-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: n8n
+      MYSQL_PASSWORD: n8n
+      MYSQL_ROOT_PASSWORD: n8n
+      MYSQL_DATABASE: n8n
+#    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./.mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  n8n:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./.n8n_data:/home/node/.n8n
+    depends_on:
+      - mysql
